@@ -112,10 +112,9 @@ resource "aws_route_table_association" "private" {
 }
 
 #10 Public route association
-resource "aws_route_table_association" "Public" {
+resource "aws_route_table_association" "public" {
   count = length(var.public_cidr)
   subnet_id = element(aws_subnet.public[*].id, count.index)
   route_table_id = aws_route_table.public.id
-
-  depends_on = [ aws_route.aws_route.public_internet_gateway, aws_subnet.public ]
+  depends_on = [ aws_route.public_internet_gateway, aws_subnet.public ]
 }

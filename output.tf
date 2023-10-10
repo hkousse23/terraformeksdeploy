@@ -7,7 +7,7 @@ output "public" {
 }
 
 output "node_role" {
-  value = aws_iam_role.nodes.role_arn
+  value = aws_iam_role.nodes.arn
 }
 
 output "demo_role" {
