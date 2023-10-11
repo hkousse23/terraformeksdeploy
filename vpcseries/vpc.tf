@@ -18,7 +18,7 @@ resource "aws_internet_gateway" "igw" {
     Name = "igw"
   }
 }
-
+/*
 # 3. create EIP
 resource "aws_eip" "nat" {
   tags = {
@@ -26,7 +26,7 @@ resource "aws_eip" "nat" {
   }
   
 }
-
+/*
 # 4. NAT Gateway
 resource "aws_nat_gateway" "nat" {
   allocation_id = aws_eip.nat.id
@@ -39,6 +39,8 @@ resource "aws_nat_gateway" "nat" {
   depends_on = [ aws_internet_gateway.igw ]
   
 }
+
+*/
 
 # 5. create private subnet
 resource "aws_subnet" "private" {
@@ -96,14 +98,14 @@ resource "aws_route" "public_internet_gateway" {
    depends_on = [ aws_route_table.public ]
   
 }
-
+/*
 # 8 create private route
 resource "aws_route" "private_nat_gateway" {
   route_table_id = aws_route_table.private.id
   nat_gateway_id = aws_nat_gateway.nat.id
   destination_cidr_block = "0.0.0.0/0"
 }
-
+*/
 # 9 private route association
 resource "aws_route_table_association" "private" {
   count = length(var.private_cidr)
