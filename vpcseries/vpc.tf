@@ -1,6 +1,6 @@
 #Using  external data to generate vpc time stamp
 data "external" "vpc_name" {
-  program = ["python3", "${path.module}/name.py"]
+  program = ["py", "${path.module}/name.py"]
 }
 
 #1. create  vpc
@@ -89,7 +89,7 @@ resource "aws_route_table" "public" {
 
 # 9 Create public route
 resource "aws_route" "public_internet_gateway" {
-  route_table_id = aws_route_table.public
+  route_table_id = aws_route_table.public.id
   destination_cidr_block = "0.0.0.0/0"
   gateway_id = aws_internet_gateway.igw.id
 

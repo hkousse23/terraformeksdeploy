@@ -1,9 +1,9 @@
 #data block to read local vpc terraform.tfstate file ### this is a local remote backend 
 #but you can't used this as backend for gitaction worflows bcos it will not work USE!! remote backend instead... 
-data "terraform_remote_state" "network" {
+data "terraform_remote_state" "network" {  # this data can run  before the vpc module is rran  --- the state wont be ready before the terraform plsan
   backend = "local"
   config = {
-    path = "../Vpc-series/terraform.tfstate"
+    path = "/vpcseries/terraform.tfstate"
   }
 }
 
