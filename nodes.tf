@@ -1,9 +1,9 @@
 #data block to read local vpc terraform.tfstate file ### this is a local remote backend 
 #but you can't used this as backend for gitaction worflows bcos it will not work USE!! remote backend instead... 
-data "terraform_remote_state" "network" {  # this data can run  before the vpc module is rran  --- the state wont be ready before the terraform plsan
+data "terraform_remote_state" "network" {  # this data can run  before the vpc module is ran  --- the state wont be ready before the terraform plsan
   backend = "local"
   config = {
-    path = "/vpcseries/terraform.tfstate"
+    path = "./vpcseries/terraform.tfstate"
   }
 }
 
@@ -39,7 +39,7 @@ resource "aws_eks_node_group" "private-nodes" {
   scaling_config {
     desired_size = 2
     max_size     = 5
-    min_size     = 0
+    min_size     = 2
   }
 
   update_config {
