@@ -1,8 +1,8 @@
 data "aws_iam_policy_document" "developer" {
   statement {
-    sid = "AllowDeveloper"
+    sid    = "AllowDeveloper"
     effect = "Allow"
-    actions = [ 
+    actions = [
       "eks:DescribeNodegroup",
       "eks:ListNodegroups",
       "eks:DescribeCluster",
@@ -12,30 +12,30 @@ data "aws_iam_policy_document" "developer" {
       "eks:ListUpdates",
       "eks:ListFargateProfiles"
 
-     ]
-     resources = [ "*" ]
-    
-  }  
-  
+    ]
+    resources = ["*"]
+
+  }
+
 }
 
 data "aws_iam_policy_document" "admin" {
   statement {
-    sid = AllowAdmin
-    effect = "Allow"
-    actions = ["*"]
+    sid       = "AllowAdmin"
+    effect    = "Allow"
+    actions   = ["*"]
     resources = ["*"]
   }
 
   statement {
-    sid = AllowPassRole
-    effect = "Allow"
-    actions = [ "iam:PassRole" ]
-    resources = [ "*" ]
+    sid       = "AllowPassRole"
+    effect    = "Allow"
+    actions   = ["iam:PassRole"]
+    resources = ["*"]
     condition {
-      test = "StringEquals"
+      test     = "StringEquals"
       variable = "iam:PassedToService"
-      values = [ "eks.amazonaws.com" ]
+      values   = ["eks.amazonaws.com"]
 
     }
   }
@@ -43,15 +43,15 @@ data "aws_iam_policy_document" "admin" {
 
 data "aws_iam_policy_document" "manager_assume_role" {
   statement {
-    sid = "AllowManagerAssumeRole"
-    effect = "Allow"
-    actions = [ "sts:AssumeRole" ]
+    sid     = "AllowManagerAssumeRole"
+    effect  = "Allow"
+    actions = ["sts:AssumeRole"]
     principals {
-      type = "AWS"
-      identifiers = [ "arn:aws:iam:${data.aws_caller_identity.current.account_id}:user/manager" ]
+      type        = "AWS"
+      identifiers = ["arn:aws:iam:${data.aws_caller_identity.current.account_id}:user/manager"]
     }
-  }  
-  
+  }
+
 }
 
 data "aws_caller_identity" "current" {}

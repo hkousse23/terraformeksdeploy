@@ -1,17 +1,17 @@
 variable "username" {
-  type = list(string)
-  default = [ "Developer1", "manager" ]
-  
+  type    = list(string)
+  default = ["Developer1", "manager"]
+
 }
 variable "env" {
-  type = list(string) 
-  default = [ "Development", "Production" ] 
-  
+  type    = list(string)
+  default = ["Development", "Production"]
+
 }
 variable "tags" {
-  type = map(string)  
+  type = map(string)
   default = {
     "Env" = "Production"
   }
-  
+
 }
