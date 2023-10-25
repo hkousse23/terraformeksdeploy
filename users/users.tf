@@ -19,7 +19,7 @@ resource "aws_iam_group" "eks_developer" {
   name = "Developer"
 }
 
-resource "aws_iam_group_policy" "develper_policy" {
+resource "aws_iam_group_policy" "developer_policy" {
   name   = "developer"
   group  = aws_iam_group.eks_developer.name
   policy = data.aws_iam_policy_document.developer.json
