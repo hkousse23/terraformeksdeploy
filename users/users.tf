@@ -2,7 +2,7 @@ resource "aws_iam_user_login_profile" "DB_user" {
   count                   = length(var.username)
   user                    = aws_iam_user.eks_user[count.index].name
   password_reset_required = true
-  pgp_key                 = "keybase:kenmak"
+  pgp_key                 = "keybase:kochfox"
 }
 
 resource "aws_iam_user" "eks_user" {
