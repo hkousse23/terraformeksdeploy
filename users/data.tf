@@ -48,7 +48,7 @@ data "aws_iam_policy_document" "manager_assume_role" {
     actions = ["sts:AssumeRole"]
     principals {
       type        = "AWS"
-      identifiers = ["arn:aws:iam:${data.aws_caller_identity.current.account_id}:user/manager"]
+      identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/manager"] #make sure to put :: after Iam to avoid malformed policy
     }
   }
 
