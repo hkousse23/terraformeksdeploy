@@ -18,7 +18,7 @@ data "aws_iam_policy_document" "developer" {
   }
 
 }
-
+/*
 data "aws_iam_policy_document" "admin" {
   statement {
     sid       = "AllowAdmin"
@@ -52,6 +52,57 @@ data "aws_iam_policy_document" "manager_assume_role" {
     }
   }
 
+} */
+
+data "aws_iam_policy_document" "masters" {
+  statement {
+    sid       = "AllowAdmin"
+    effect    = "Allow"
+    actions   = ["*"]
+    resources = ["*"]
+  }
+
+  statement {
+    sid       = "AllowPassRole"
+    effect    = "Allow"
+    actions   = ["iam:PassRole"]
+    resources = ["*"]
+    condition {
+      test     = "StringEquals"
+      variable = "iam:PassedToService"
+      values   = ["eks.amazonaws.com"]
+
+    }
+  }
 }
+
+data "aws_iam_policy_document" "masters_assume_role" {
+  statement {
+    sid     = "AllowManagerAssumeRole"
+    effect  = "Allow"
+    actions = ["sts:AssumeRole"]
+    principals {
+      type        = "AWS"
+      identifiers = [data.aws_caller_identity.current.account_id]
+    }
+  }
+
+}
+
+data "aws_iam_policy_document" "masters_role" {
+  statement {
+    sid     = "AllowManagerAssumeRole"
+    effect  = "Allow"
+    actions = ["sts:AssumeRole"]
+    /*principals {
+      type        = "AWS"
+      identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/Masters-eks-role"]  #this principals line is inacceptable for policy so the work around is in the next line
+    } */
+
+    resources = [ "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/Masters-eks-role" ] # This looks like a regular policy
+  }
+
+}
+
 
 data "aws_caller_identity" "current" {}
