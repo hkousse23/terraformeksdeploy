@@ -1,2 +1,2 @@
 make sure that iam in identifiers is followed by :: (data.tf)
-Also make Developer is between a double quote specially any value for name (users.tf)
+Also Developer is between a double quote specially any value for name (users.tf)
