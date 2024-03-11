@@ -1,8 +1,8 @@
 data "terraform_remote_state" "network" {
   backend = "s3"
   config = {
-    bucket = "modulebuck"
+    bucket = "modulebuck" #change the name of the bucket#
     key = "statefiles/terraform.tfstate"
-    region = "us-east-1"
+    region = var.region
   }
 }
